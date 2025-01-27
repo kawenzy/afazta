@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./main.css" rel="stylesheet" type="text/css">
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <meta name="og:description" content="Just bored guy" />
+    <meta name="og:image" content="./assets/image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="./assets/image.png" />
+    <meta name="twitter:description" content="Just bored guy" />
     <title>Afazta</title>
 </head>
 
@@ -14,7 +19,14 @@
         <div class="bg-conic-120 from-blue-600 via-blue-200 to-blue-600 backdrop-blur">
             <div class="m-auto grid justify-center items-center min-h-screen">
                 <div
-                    class="w-[600px] h-[400px] p-8 rounded-[10px] backdrop-blur-[70px] shadow-xl shadow-blue-900/10 bg-white/20 appearance-none">
+                    class="rounded-[10px] backdrop-blur-[70px] shadow-xl shadow-blue-900/10 bg-white/20 appearance-none p-4 min-h-[70px] flex grow justify-center lg:hidden">
+                    <div class="m-auto justify-center items-center min-h-full flex grow">
+                        <p class="funnel-sans appearance-none text-blue-50 font-semibold text-xl">Only Laptop Version
+                        </p>
+                    </div>
+                </div>
+                <div
+                    class="w-[600px] h-[400px] p-8 rounded-[10px] backdrop-blur-[70px] shadow-xl shadow-blue-900/10 bg-white/20 appearance-none hidden lg:block">
                     <div class="flex gap-4 items-start  ml-auto ">
                         <div class="w-[160px] h-[160px] appearance-none ">
                             <img src="./assets/pf.jfif" alt="pf" class="rounded-[5px]" />
@@ -79,11 +91,13 @@
                                     </div>
                                 </div>
                                 <div class="h-3"></div>
-                                <input id="progressBar" type="range" max="100" step="0.1" value="0" min="0" class="w-full bg-blue-300/50 cursor-pointer backdrop-blur-lg appearance-none rounded-[2px] [&::-webkit-slider-thumb]:bg-blue-200/50 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-[20px] [&::-webkit-slider-thumb]:w-[15px] [&::-webkit-slider-thumb]:rounded-[1px]"/>
+                                <input id="progressBar" type="range" max="100" step="0.1" value="0" min="0"
+                                    class="w-full bg-blue-300/50 cursor-pointer backdrop-blur-lg appearance-none rounded-[2px] [&::-webkit-slider-thumb]:bg-blue-200/50 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-[20px] [&::-webkit-slider-thumb]:w-[15px] [&::-webkit-slider-thumb]:rounded-[1px]" />
                                 <div class="h-3"></div>
                                 <div class="flex items-center justify-evenly gap-4">
                                     <p class="text-blue-200 roboto " id="currentTime">00:00</p>
-                                    <div id="playPauseBtn" class="p-2 rounded-full bg-blue-300/50 backdrop-blur-md group cursor-pointer appearance-none">
+                                    <div id="playPauseBtn"
+                                        class="p-2 rounded-full bg-blue-300/50 backdrop-blur-md group cursor-pointer appearance-none">
                                         <i id="playIcon" data-lucide="play"
                                             class="size-6 text-blue-200 group-hover:text-blue-100 "></i>
                                         <i id="pauseIcon" data-lucide="pause"
@@ -121,10 +135,10 @@
                                 </div>
                             </a>
                             <div class="h-5"></div>
-                                <div
-                                    class=" rounded-full bg-blue-600/50  backdrop-blur-md p-4 cursor-pointer group appearance-none" id="share">
-                                    <i data-lucide="share-2" class="size-8 text-blue-200 group-hover:text-blue-50"></i>
-                                </div>
+                            <div class=" rounded-full bg-blue-600/50  backdrop-blur-md p-4 cursor-pointer group appearance-none"
+                                id="share">
+                                <i data-lucide="share-2" class="size-8 text-blue-200 group-hover:text-blue-50"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -135,47 +149,47 @@
     <script>
         lucide.createIcons();
     </script>
-  <script>
-    const playPauseBtn = document.getElementById("playPauseBtn");
-    const pauseIcon = document.getElementById("pauseIcon");
-    const playIcon = document.getElementById("playIcon");
-    const progress = document.getElementById("progressBar");
-    const currTime = document.getElementById("currentTime");
-    const totalTime = document.getElementById("totalTime");
-    const audio = document.getElementById("audio");
-    const shares = document.getElementById("share");
+    <script>
+        const playPauseBtn = document.getElementById("playPauseBtn");
+        const pauseIcon = document.getElementById("pauseIcon");
+        const playIcon = document.getElementById("playIcon");
+        const progress = document.getElementById("progressBar");
+        const currTime = document.getElementById("currentTime");
+        const totalTime = document.getElementById("totalTime");
+        const audio = document.getElementById("audio");
+        const shares = document.getElementById("share");
 
-    const formatTm = (time) =>{ 
-        const minute = Math.floor(time / 60);
-        const seconds = Math.floor(time % 60);
-        return `${minute.toString().padStart(2, "0")}:${seconds.toString().padStart(2,"0")}`
-    };
-    playPauseBtn.addEventListener("click",()=>{
-        if(audio.paused) {
-            audio.play();
-            playIcon.classList.add("hidden");
-            pauseIcon.classList.remove("hidden");
-        }else{
-            audio.pause();
-            playIcon.classList.remove("hidden");
-            pauseIcon.classList.add("hidden");
-        }
-    });
-    audio.addEventListener("timeupdate", () => {
-        const prgs = (audio.currentTime / audio.duration) * 100;
-        progress.value = prgs;
+        const formatTm = (time) => {
+            const minute = Math.floor(time / 60);
+            const seconds = Math.floor(time % 60);
+            return `${minute.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
+        };
+        playPauseBtn.addEventListener("click", () => {
+            if (audio.paused) {
+                audio.play();
+                playIcon.classList.add("hidden");
+                pauseIcon.classList.remove("hidden");
+            } else {
+                audio.pause();
+                playIcon.classList.remove("hidden");
+                pauseIcon.classList.add("hidden");
+            }
+        });
+        audio.addEventListener("timeupdate", () => {
+            const prgs = (audio.currentTime / audio.duration) * 100;
+            progress.value = prgs;
 
-        currTime.textContent = formatTm(audio.currentTime);
-        totalTime.textContent = `${formatTm(audio.duration)}`;
-    });
-    progress.addEventListener("input", () => {
-        const seekTm = (progress.value / 100) * audio.duration;
-        audio.currentTime = seekTm;
-    });
-    shares.addEventListener("click",() => {
-        navigator.clipboard.writeText(window.location.href);
-    });
-  </script>
+            currTime.textContent = formatTm(audio.currentTime);
+            totalTime.textContent = `${formatTm(audio.duration)}`;
+        });
+        progress.addEventListener("input", () => {
+            const seekTm = (progress.value / 100) * audio.duration;
+            audio.currentTime = seekTm;
+        });
+        shares.addEventListener("click", () => {
+            navigator.clipboard.writeText(window.location.href);
+        });
+    </script>
 </body>
 
 </html>
